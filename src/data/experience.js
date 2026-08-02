@@ -1,0 +1,153 @@
+export const experiences = [
+  {
+    id: 1,
+    role: 'AI Automation & Full-Stack Developer',
+    company: 'Son of Wisdom',
+    location: 'Remote · United States',
+    period: 'April 2025 – Present',
+    current: true,
+    summary:
+      'Designing and implementing AI-powered systems, CRM automations, web applications, platform integrations and technical operations for a coaching and digital education company.',
+    achievements: [
+      'Built and maintained AI coaching experiences using Delphi.ai and custom AI systems.',
+      'Developed custom survey funnels with qualification logic, early lead capture and automated CRM routing.',
+      'Created GoHighLevel workflows for lead nurturing, booking updates, reschedules, follow-ups and contact segmentation.',
+      'Integrated platforms including Zapier, GoHighLevel, iClosed, Frame.io, Commas, Google Sheets and external webhooks.',
+      'Developed the AI Blake mobile installation experience using PWA technology, device detection and Netlify deployment.',
+      'Built production dashboards using Google Apps Script, Sheets, JavaScript and embedded interfaces.',
+      'Designed AI prompts, personas, knowledge structures and workflow logic for coaching and sales agents.',
+      'Managed GitHub repositories, deployment environments, troubleshooting, documentation and system improvements.',
+    ],
+    technologies: [
+      'React',
+      'JavaScript',
+      'GoHighLevel',
+      'Zapier',
+      'Delphi.ai',
+      'OpenAI',
+      'Supabase',
+      'Pinecone',
+      'Netlify',
+      'GitHub',
+      'Google Apps Script',
+      'Webhooks',
+    ],
+  },
+  {
+    id: 2,
+    role: 'Executive Technical Officer',
+    company: 'Real Estate Marketing Agency',
+    location: 'Texas, United States',
+    period: 'July 2023 – February 2025',
+    current: false,
+    summary:
+      'Supported leadership and business operations through automation, technical management, website development, reporting and process improvement.',
+    achievements: [
+      'Automated repetitive workflows using AI, Zapier and CRM tools.',
+      'Managed websites, software systems, troubleshooting and technical security.',
+      'Supported digital marketing, SEO, advertising and performance tracking.',
+      'Created process documentation, training materials and internal systems.',
+      'Provided executive support across technical and operational priorities.',
+    ],
+    technologies: [
+      'Zapier',
+      'CRM Systems',
+      'WordPress',
+      'JavaScript',
+      'ChatGPT',
+      'Google Workspace',
+      'Analytics',
+    ],
+  },
+  {
+    id: 3,
+    role: 'Data Manager',
+    company: 'Fitness & Wellness Company',
+    location: 'Arizona, United States',
+    period: 'April 2023 – March 2024',
+    current: false,
+    summary:
+      'Managed business data, reporting structures and operational information used for decision-making and process improvement.',
+    achievements: [
+      'Organised and maintained structured business databases.',
+      'Analysed data trends and prepared operational reports.',
+      'Improved data accuracy, accessibility and internal workflows.',
+      'Used automation and CRM tools to reduce manual work.',
+    ],
+    technologies: [
+      'Google Sheets',
+      'CRM Systems',
+      'Data Analysis',
+      'Reporting',
+      'Automation',
+    ],
+  },
+  {
+    id: 4,
+    role: 'Senior Talent Sourcer',
+    company: 'Freelancing & Outsourcing Platform',
+    location: 'California, United States',
+    period: 'March 2020 – February 2023',
+    current: false,
+    summary:
+      'Sourced and evaluated candidates for multiple roles using research, Boolean search, outreach and initial screening.',
+    achievements: [
+      'Identified candidates using professional networks, social media and Boolean search.',
+      'Created outreach campaigns and recruiting communication.',
+      'Coordinated with hiring managers to define role requirements.',
+      'Conducted initial interviews and candidate evaluations.',
+    ],
+    technologies: [
+      'LinkedIn',
+      'Boolean Search',
+      'Recruiting Platforms',
+      'Google Workspace',
+      'CRM Tools',
+    ],
+  },
+  {
+    id: 5,
+    role: 'Executive Assistant & Website Developer',
+    company: 'Driving Consultation Business',
+    location: 'Queensland, Australia',
+    period: 'April 2020 – May 2021',
+    current: false,
+    summary:
+      'Combined executive administration with website development, maintenance and digital business support.',
+    achievements: [
+      'Built and maintained company website pages and content.',
+      'Managed scheduling, communication, records and documentation.',
+      'Supported meetings, customer communication and daily administration.',
+    ],
+    technologies: [
+      'WordPress',
+      'HTML',
+      'CSS',
+      'Google Workspace',
+      'Microsoft Office',
+    ],
+  },
+]
+
+export const earlierExperience = [
+  {
+    role: 'Senior Customer Support & Administrative Assistant',
+    company: 'Tax Consulting Company',
+    period: '2017 – 2020',
+  },
+  {
+    role: 'Social Media Manager',
+    company: 'Women & Children’s Rights Consultancy',
+    period: '2016 – 2017',
+  },
+  {
+    role: 'Finance Associate',
+    company: 'Motorcycle Financing Company',
+    period: '2016',
+  },
+  {
+    role: 'Call Center Specialist',
+    company: 'Business Process Outsourcing Company',
+    period: '2014',
+  },
+]
