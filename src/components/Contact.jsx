@@ -175,7 +175,7 @@ function Contact() {
                   </a>
 
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/in/jpatrickmagadia/"
                     aria-label="LinkedIn profile"
                     className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition hover:border-violet-500/40 hover:bg-violet-500/10 hover:text-white"
                   >

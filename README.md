@@ -1,16 +1,92 @@
-# React + Vite
+# J Patrick Magadia — Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive personal portfolio showcasing my work in AI automation, full-stack development, CRM systems, platform integrations, and technical operations.
 
-Currently, two official plugins are available:
+## Live Website
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[j-patrick-portfolio.pages.dev](https://j-patrick-portfolio.pages.dev)
 
-## React Compiler
+## About the Project
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This portfolio was built to present my technical experience, services, projects, development process, and professional background in one central website.
 
-## Expanding the ESLint configuration
+It highlights practical systems I have worked on across:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- AI assistants and intelligent workflows
+- Business and CRM automation
+- Websites and web applications
+- API and webhook integrations
+- Lead qualification funnels
+- Progressive Web Apps
+- Technical operations and deployment
+
+## Features
+
+- Responsive desktop, tablet, and mobile layout
+- Functional mobile navigation
+- Downloadable résumé
+- Project and experience sections
+- Grouped technical skills
+- Contact form powered by Web3Forms
+- Social-sharing metadata
+- Open Graph preview image
+- Automatic deployment through Cloudflare Pages
+- GitHub-based deployment workflow
+
+## Technology Stack
+
+### Frontend
+
+- React
+- JavaScript
+- Vite
+- Tailwind CSS
+
+### UI and Icons
+
+- Lucide React
+- React Icons
+
+### Form Handling
+
+- Web3Forms
+
+### Development and Deployment
+
+- Visual Studio Code
+- Git
+- GitHub
+- Cloudflare Pages
+- npm
+
+## Project Structure
+
+```text
+j-patrick-portfolio/
+├── public/
+│   ├── J-Patrick-Magadia-Resume.pdf
+│   ├── favicon.svg
+│   └── portfolio-preview.png
+├── src/
+│   ├── components/
+│   │   ├── About.jsx
+│   │   ├── Contact.jsx
+│   │   ├── Experience.jsx
+│   │   ├── Footer.jsx
+│   │   ├── Hero.jsx
+│   │   ├── Navbar.jsx
+│   │   ├── Process.jsx
+│   │   ├── Projects.jsx
+│   │   ├── Services.jsx
+│   │   └── Skills.jsx
+│   ├── data/
+│   │   ├── experience.js
+│   │   ├── projects.js
+│   │   └── skills.js
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── .gitignore
+├── index.html
+├── package.json
+└── vite.config.js
