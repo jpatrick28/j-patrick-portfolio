@@ -34,24 +34,46 @@ function Contact() {
   async function handleSubmit(event) {
     event.preventDefault()
 
-    const recipient = 'j.patrickmagadia28@gmail.com'
+    if (status === 'sending') return
 
-    const subject = encodeURIComponent(
-      `Portfolio enquiry from ${formData.name}`,
-    )
+    setStatus('sending')
 
-    const body = encodeURIComponent(
-      `Name: ${formData.name}
-Email: ${formData.email}
-Company: ${formData.company || 'Not provided'}
-Project type: ${formData.projectType}
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          subject: `New portfolio enquiry from ${formData.name}`,
+          from_name: 'J Patrick Portfolio',
+          name: formData.name,
+          email: formData.email,
+          company: formData.company || 'Not provided',
+          project_type: formData.projectType,
+          message: formData.message,
+          botcheck: '',
+        }),
+      })
 
-Project details:
-${formData.message}`,
-    )
+      const result = await response.json()
 
-    window.location.href =
-      `mailto:${recipient}?subject=${subject}&body=${body}`
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'Submission failed.')
+      }
+
+      setStatus('success')
+      setFormData(initialForm)
+
+      setTimeout(() => {
+        setStatus('idle')
+      }, 6000)
+    } catch (error) {
+      console.error('Contact form error:', error)
+      setStatus('error')
+    }
   }
 
   return (
@@ -282,9 +304,14 @@ ${formData.message}`,
                   <CheckCircle2 size={19} className="mt-0.5 shrink-0" />
 
                   <p>
-                    The form interface is working. We still need to connect
-                    Web3Forms before submissions can be emailed to you.
+                    Your enquiry was sent successfully. I will respond as soon as possible.
                   </p>
+                </div>
+              )}
+
+              {status === 'error' && (
+                <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">
+                  The message could not be sent. Please try again or contact me directly by email.
                 </div>
               )}
 
