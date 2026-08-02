@@ -29,12 +29,29 @@ function Contact() {
       ...currentData,
       [name]: value,
     }))
+
+    if (status === 'error') {
+      setStatus('idle')
+    }
   }
 
   async function handleSubmit(event) {
     event.preventDefault()
 
-    if (status === 'sending') return
+    if (status === 'sending') {
+      return
+    }
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+
+    if (!accessKey) {
+      console.error(
+        'Missing VITE_WEB3FORMS_ACCESS_KEY. Add it to your local .env file and Cloudflare production environment variables.',
+      )
+
+      setStatus('error')
+      return
+    }
 
     setStatus('sending')
 
@@ -46,14 +63,16 @@ function Contact() {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          access_key: accessKey,
           subject: `New portfolio enquiry from ${formData.name}`,
           from_name: 'J Patrick Portfolio',
-          name: formData.name,
-          email: formData.email,
-          company: formData.company || 'Not provided',
+
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          company: formData.company.trim() || 'Not provided',
           project_type: formData.projectType,
-          message: formData.message,
+          message: formData.message.trim(),
+
           botcheck: '',
         }),
       })
@@ -61,13 +80,15 @@ function Contact() {
       const result = await response.json()
 
       if (!response.ok || !result.success) {
-        throw new Error(result.message || 'Submission failed.')
+        throw new Error(
+          result.message || 'The contact form submission failed.',
+        )
       }
 
       setStatus('success')
       setFormData(initialForm)
 
-      setTimeout(() => {
+      window.setTimeout(() => {
         setStatus('idle')
       }, 6000)
     } catch (error) {
@@ -212,6 +233,14 @@ function Contact() {
             </div>
 
             <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+              <input
+                type="checkbox"
+                name="botcheck"
+                className="hidden"
+                tabIndex="-1"
+                autoComplete="off"
+              />
+
               <div className="grid gap-5 sm:grid-cols-2">
                 <FormField
                   label="Your name"
@@ -264,17 +293,33 @@ function Contact() {
                       Select a project type
                     </option>
 
-                    <option value="AI System">AI system or assistant</option>
-                    <option value="Automation">Business automation</option>
-                    <option value="Website">Website development</option>
+                    <option value="AI System">
+                      AI system or assistant
+                    </option>
+
+                    <option value="Automation">
+                      Business automation
+                    </option>
+
+                    <option value="Website">
+                      Website development
+                    </option>
+
                     <option value="Web Application">
                       Web application
                     </option>
-                    <option value="CRM Integration">CRM integration</option>
+
+                    <option value="CRM Integration">
+                      CRM integration
+                    </option>
+
                     <option value="Technical Support">
                       Technical operations
                     </option>
-                    <option value="Other">Other</option>
+
+                    <option value="Other">
+                      Other
+                    </option>
                   </select>
                 </div>
               </div>
@@ -300,18 +345,29 @@ function Contact() {
               </div>
 
               {status === 'success' && (
-                <div className="flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-300">
-                  <CheckCircle2 size={19} className="mt-0.5 shrink-0" />
+                <div
+                  role="status"
+                  className="flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-300"
+                >
+                  <CheckCircle2
+                    size={19}
+                    className="mt-0.5 shrink-0"
+                  />
 
                   <p>
-                    Your enquiry was sent successfully. I will respond as soon as possible.
+                    Your enquiry was sent successfully. I will respond as soon
+                    as possible.
                   </p>
                 </div>
               )}
 
               {status === 'error' && (
-                <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-300">
-                  The message could not be sent. Please try again or contact me directly by email.
+                <div
+                  role="alert"
+                  className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm leading-6 text-red-300"
+                >
+                  The message could not be sent. Please try again or contact
+                  me directly by email.
                 </div>
               )}
 
@@ -330,7 +386,9 @@ function Contact() {
                     ? 'Sending...'
                     : 'Send project enquiry'}
 
-                  {status !== 'sending' && <ArrowRight size={17} />}
+                  {status !== 'sending' && (
+                    <ArrowRight size={17} />
+                  )}
                 </button>
               </div>
             </form>
@@ -353,7 +411,9 @@ function ContactDetail({ icon, label, value, href }) {
           {label}
         </p>
 
-        <p className="mt-1 text-sm font-medium text-zinc-300">{value}</p>
+        <p className="mt-1 text-sm font-medium text-zinc-300">
+          {value}
+        </p>
       </div>
     </>
   )
@@ -369,7 +429,11 @@ function ContactDetail({ icon, label, value, href }) {
     )
   }
 
-  return <div className="flex items-center gap-4">{content}</div>
+  return (
+    <div className="flex items-center gap-4">
+      {content}
+    </div>
+  )
 }
 
 function FormField({
@@ -383,7 +447,10 @@ function FormField({
 }) {
   return (
     <div>
-      <label htmlFor={name} className="text-sm font-medium text-zinc-300">
+      <label
+        htmlFor={name}
+        className="text-sm font-medium text-zinc-300"
+      >
         {label}
       </label>
 
