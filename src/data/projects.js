@@ -147,4 +147,32 @@ export const projects = [
     liveUrl: null,
     repositoryUrl: null,
   },
+  {
+    id: 7,
+    title: 'Synervant Systems',
+    category: 'AI Automation Agency Website',
+    description:
+      'A responsive agency website created for a fictional AI automation company, presenting services, business solutions, industries, engagement options and a working project enquiry system.',
+    highlights: [
+      'Responsive multi-section agency website',
+      'Reusable React component architecture',
+      'Interactive FAQ accordion',
+      'Working Web3Forms contact integration',
+      'SEO and social-sharing metadata',
+      'GitHub and Cloudflare Pages deployment',
+    ],
+    technologies: [
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'JavaScript',
+      'Web3Forms',
+      'Cloudflare Pages',
+    ],
+    status: 'Live',
+    featured: true,
+    liveUrl: 'https://synervant-systems.pages.dev/',
+    repositoryUrl:
+      'https://github.com/jpatrick28/synervant-systems',
+  },
 ]
