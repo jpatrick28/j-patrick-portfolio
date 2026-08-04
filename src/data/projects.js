@@ -175,4 +175,31 @@ export const projects = [
     repositoryUrl:
       'https://github.com/jpatrick28/synervant-systems',
   },
+  {
+    id: 8,
+    title: 'Cohervia',
+    category: 'SaaS Product Website',
+    description:
+      'A responsive SaaS landing page for a fictional operations platform that combines task management, workflow automation, approvals, integrations and reporting.',
+    highlights: [
+      'Designed a complete SaaS marketing experience',
+      'Created a detailed product dashboard interface',
+      'Built interactive monthly and yearly pricing controls',
+      'Developed workflow and integration demonstrations',
+      'Added responsive FAQ and mobile navigation',
+      'Configured production metadata and Cloudflare deployment',
+    ],
+    technologies: [
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'JavaScript',
+      'Lucide React',
+      'Cloudflare Pages',
+    ],
+    status: 'Live',
+    featured: true,
+    liveUrl: 'https://cohervia-saas.pages.dev/',
+    repositoryUrl: 'https://github.com/jpatrick28/cohervia-saas',
+  },
 ]
