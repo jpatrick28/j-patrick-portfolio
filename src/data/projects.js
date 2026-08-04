@@ -229,4 +229,33 @@ export const projects = [
     liveUrl: 'https://aurevane-estates.pages.dev/',
     repositoryUrl: 'https://github.com/jpatrick28/aurevane-estates',
   },
+  {
+  id: 10,
+  title: 'Merevia Home',
+  category: 'Interactive E-commerce Website',
+  description:
+    'A responsive premium home and lifestyle storefront featuring product filtering, search, sorting, quick-view modals, favorites, a persistent shopping cart and a working newsletter form.',
+  highlights: [
+    'Built a complete interactive e-commerce storefront',
+    'Created product search, category filtering and sorting',
+    'Added product quick-view modals and image galleries',
+    'Built a persistent shopping cart using local storage',
+    'Developed quantity controls, removal actions and cart totals',
+    'Integrated a working Web3Forms newsletter signup',
+    'Configured SEO metadata and Cloudflare Pages deployment',
+  ],
+  technologies: [
+    'React',
+    'Vite',
+    'Tailwind CSS',
+    'JavaScript',
+    'Local Storage',
+    'Web3Forms',
+    'Cloudflare Pages',
+  ],
+  status: 'Live',
+  featured: true,
+  liveUrl: 'https://merevia-home.pages.dev/',
+  repositoryUrl: 'https://github.com/jpatrick28/merevia-home',
+},
 ]
