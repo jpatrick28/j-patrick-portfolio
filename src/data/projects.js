@@ -202,4 +202,31 @@ export const projects = [
     liveUrl: 'https://cohervia-saas.pages.dev/',
     repositoryUrl: 'https://github.com/jpatrick28/cohervia-saas',
   },
+  {
+    id: 9,
+    title: 'Aurevane Estates',
+    category: 'Luxury Real Estate Website',
+    description:
+      'A responsive luxury real estate website for a fictional international property brand, featuring curated listings, private advisory, interactive galleries and a working consultation form.',
+    highlights: [
+      'Designed a premium editorial-style real estate experience',
+      'Built an interactive featured-listing carousel',
+      'Added saved-property controls and gallery lightbox',
+      'Created buyer, seller and advisor sections',
+      'Integrated a working Web3Forms consultation form',
+      'Configured SEO metadata and Cloudflare Pages deployment',
+    ],
+    technologies: [
+      'React',
+      'Vite',
+      'Tailwind CSS',
+      'JavaScript',
+      'Web3Forms',
+      'Cloudflare Pages',
+    ],
+    status: 'Live',
+    featured: true,
+    liveUrl: 'https://aurevane-estates.pages.dev/',
+    repositoryUrl: 'https://github.com/jpatrick28/aurevane-estates',
+  },
 ]
