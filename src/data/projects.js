@@ -350,4 +350,37 @@ export const projects = [
   liveUrl: 'https://northline-journal.pages.dev/',
   repositoryUrl: 'https://github.com/jpatrick28/northline-journal',
 },
+
+{
+  id: 14,
+  title: 'SignalDesk',
+  category: 'Customer Support Intelligence Dashboard',
+  description:
+    'A responsive SaaS dashboard for managing support tickets, customer conversations, account health, analytics, notifications, workspace settings and downloadable reports.',
+  highlights: [
+    'Designed an application-first dashboard instead of a traditional marketing website',
+    'Built a collapsible desktop sidebar and responsive mobile navigation',
+    'Created searchable, filterable and sortable support-ticket workflows',
+    'Built persistent customer and conversation records using local storage',
+    'Added ticket and customer detail drawers with contextual actions',
+    'Created interactive support analytics using Recharts',
+    'Added working CSV exports for dashboard, customer and analytics data',
+    'Built a functional command palette with keyboard navigation',
+    'Added notifications, settings, help center and dark mode',
+    'Configured responsive layouts and deployed through Cloudflare Pages',
+  ],
+  technologies: [
+    'React',
+    'Vite',
+    'Tailwind CSS',
+    'JavaScript',
+    'Recharts',
+    'Local Storage',
+    'Cloudflare Pages',
+  ],
+  status: 'Live',
+  featured: true,
+  liveUrl: 'https://signaldesk-dzh.pages.dev/',
+  repositoryUrl: 'https://github.com/jpatrick28/signaldesk',
+},
 ]
