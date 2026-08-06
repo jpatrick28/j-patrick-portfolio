@@ -147,8 +147,7 @@ function Process() {
         </div>
 
         <div className="relative mt-16">
-          <div className="absolute bottom-8 left-7 top-8 hidden w-px bg-gradient-to-b from-violet-500/50 via-blue-500/30 to-transparent lg:block" />
-
+          
           <div className="grid gap-5 lg:grid-cols-2">
             {processSteps.map((step, index) => {
               const Icon = step.icon
@@ -227,12 +226,12 @@ function Process() {
             </div>
 
             <a
-              href="#contact"
-              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-violet-100"
-            >
-              Start a project
-              <ArrowRight size={17} />
-            </a>
+  href="#contact"
+  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-zinc-950 transition hover:bg-violet-100"
+>
+  Start a project
+  <ArrowRight size={17} />
+</a>
           </div>
         </div>
       </div>
