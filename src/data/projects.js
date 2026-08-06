@@ -383,4 +383,38 @@ export const projects = [
   liveUrl: 'https://signaldesk-dzh.pages.dev/',
   repositoryUrl: 'https://github.com/jpatrick28/signaldesk',
 },
+{
+  id: 15,
+  title: 'Aether Archive',
+  category: 'Immersive Digital Exhibition',
+  description:
+    'A cinematic digital museum experience featuring speculative antiquities, searchable artifact records, animated exhibition storytelling, a historical timeline, ambient sound controls, and a persistent saved collection.',
+  highlights: [
+    'Designed an immersive museum experience instead of a conventional website layout',
+    'Built a cinematic fullscreen exhibition hero with animated visual elements',
+    'Created searchable and category-filtered artifact discovery',
+    'Built detailed artifact records with provenance, interpretation, materials, and dimensions',
+    'Added a persistent personal collection using local storage',
+    'Created an animated collection drawer and fullscreen artifact viewer',
+    'Built a chronological exhibition timeline with scroll-based animation',
+    'Added responsive mobile navigation and keyboard-accessible overlays',
+    'Integrated optional ambient audio with playback, mute, and volume controls',
+    'Configured metadata, social preview assets, GitHub deployment, and Cloudflare Pages hosting',
+  ],
+  technologies: [
+    'React',
+    'Vite',
+    'Tailwind CSS',
+    'JavaScript',
+    'Framer Motion',
+    'Local Storage',
+    'Cloudflare Pages',
+  ],
+  status: 'Live',
+  featured: true,
+  liveUrl:
+    'https://aether-archive-a0a.pages.dev/',
+  repositoryUrl:
+    'https://github.com/jpatrick28/aether-archive',
+},
 ]
