@@ -8,7 +8,10 @@ import {
   MessageSquare,
   Send,
 } from 'lucide-react'
-import { FaGithub, FaLinkedin } from 'react-icons/fa'
+import {
+  FaGithub,
+  FaLinkedin,
+} from 'react-icons/fa'
 
 const initialForm = {
   name: '',
@@ -16,21 +19,70 @@ const initialForm = {
   company: '',
   projectType: '',
   message: '',
+  botcheck: '',
 }
 
+const projectTypes = [
+  {
+    value: 'AI System',
+    label: 'AI system or assistant',
+  },
+  {
+    value: 'Automation',
+    label: 'Business automation',
+  },
+  {
+    value: 'Website',
+    label: 'Website development',
+  },
+  {
+    value: 'Web Application',
+    label: 'Web application',
+  },
+  {
+    value: 'CRM Integration',
+    label: 'CRM integration',
+  },
+  {
+    value: 'Technical Support',
+    label: 'Technical operations',
+  },
+  {
+    value: 'Other',
+    label: 'Other',
+  },
+]
+
+const suitableProjects = [
+  'AI assistants and internal tools',
+  'CRM and workflow automation',
+  'Custom websites and web applications',
+  'API, webhook and platform integrations',
+  'Technical system troubleshooting',
+]
+
 function Contact() {
-  const [formData, setFormData] = useState(initialForm)
-  const [status, setStatus] = useState('idle')
+  const [formData, setFormData] =
+    useState(initialForm)
+
+  const [status, setStatus] =
+    useState('idle')
 
   function handleChange(event) {
-    const { name, value } = event.target
+    const {
+      name,
+      value,
+    } = event.target
 
     setFormData((currentData) => ({
       ...currentData,
       [name]: value,
     }))
 
-    if (status === 'error') {
+    if (
+      status === 'error' ||
+      status === 'success'
+    ) {
       setStatus('idle')
     }
   }
@@ -42,7 +94,13 @@ function Contact() {
       return
     }
 
-    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
+    if (formData.botcheck) {
+      return
+    }
+
+    const accessKey =
+      import.meta.env
+        .VITE_WEB3FORMS_ACCESS_KEY
 
     if (!accessKey) {
       console.error(
@@ -56,32 +114,48 @@ function Contact() {
     setStatus('sending')
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
+      const response = await fetch(
+        'https://api.web3forms.com/submit',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type':
+              'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: accessKey,
+            subject: `New portfolio enquiry from ${formData.name.trim()}`,
+            from_name:
+              'J Patrick Portfolio',
+
+            name: formData.name.trim(),
+            email:
+              formData.email.trim(),
+            company:
+              formData.company.trim() ||
+              'Not provided',
+            project_type:
+              formData.projectType,
+            message:
+              formData.message.trim(),
+
+            botcheck:
+              formData.botcheck,
+          }),
         },
-        body: JSON.stringify({
-          access_key: accessKey,
-          subject: `New portfolio enquiry from ${formData.name}`,
-          from_name: 'J Patrick Portfolio',
+      )
 
-          name: formData.name.trim(),
-          email: formData.email.trim(),
-          company: formData.company.trim() || 'Not provided',
-          project_type: formData.projectType,
-          message: formData.message.trim(),
+      const result =
+        await response.json()
 
-          botcheck: '',
-        }),
-      })
-
-      const result = await response.json()
-
-      if (!response.ok || !result.success) {
+      if (
+        !response.ok ||
+        !result.success
+      ) {
         throw new Error(
-          result.message || 'The contact form submission failed.',
+          result.message ||
+            'The contact form submission failed.',
         )
       }
 
@@ -92,7 +166,11 @@ function Contact() {
         setStatus('idle')
       }, 6000)
     } catch (error) {
-      console.error('Contact form error:', error)
+      console.error(
+        'Contact form error:',
+        error,
+      )
+
       setStatus('error')
     }
   }
@@ -102,7 +180,13 @@ function Contact() {
       id="contact"
       className="relative overflow-hidden border-t border-white/10 bg-zinc-950 px-6 py-24 lg:px-8 lg:py-32"
     >
-      <div className="absolute left-1/2 top-0 h-[450px] w-[450px] -translate-x-1/2 rounded-full bg-violet-600/15 blur-[160px]" />
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/2 top-0 h-[450px] w-[450px] -translate-x-1/2 rounded-full bg-violet-600/15 blur-[160px]" />
+
+        <div className="absolute bottom-[-8rem] right-[-6rem] h-80 w-80 rounded-full bg-blue-600/10 blur-[140px]" />
+
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.018)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.018)_1px,transparent_1px)] bg-[size:72px_72px]" />
+      </div>
 
       <div className="relative mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
@@ -111,16 +195,19 @@ function Contact() {
             Contact
           </div>
 
-          <h2 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl">
-            Have a system that needs
-            <span className="block text-violet-400">
+          <h2 className="mt-6 text-4xl font-bold leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
+            Have a product, workflow or
+            system that needs
+            <span className="block bg-gradient-to-r from-violet-400 via-fuchsia-400 to-blue-400 bg-clip-text text-transparent">
               to work better?
             </span>
           </h2>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-zinc-400">
-            Tell me what you are trying to build, automate or improve. I will
-            review the problem and determine the most practical technical
+            Tell me what you are trying to
+            build, automate or improve. I will
+            review the problem and determine
+            the most practical technical
             approach.
           </p>
         </div>
@@ -133,8 +220,11 @@ function Contact() {
               </h3>
 
               <p className="mt-3 text-sm leading-7 text-zinc-500">
-                Available for freelance development, automation projects,
-                technical operations and long-term remote opportunities.
+                Available for freelance
+                development, automation
+                projects, technical operations
+                and long-term remote
+                opportunities.
               </p>
 
               <div className="mt-7 space-y-5">
@@ -146,13 +236,17 @@ function Contact() {
                 />
 
                 <ContactDetail
-                  icon={<MapPin size={20} />}
+                  icon={
+                    <MapPin size={20} />
+                  }
                   label="Location"
                   value="Philippines · Available remotely"
                 />
 
                 <ContactDetail
-                  icon={<Clock3 size={20} />}
+                  icon={
+                    <Clock3 size={20} />
+                  }
                   label="Availability"
                   value="Remote projects and opportunities"
                 />
@@ -164,52 +258,49 @@ function Contact() {
                 </p>
 
                 <div className="mt-4 flex gap-3">
-                  <a
+                  <SocialLink
                     href="https://github.com/jpatrick28"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="GitHub profile"
-                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition hover:border-violet-500/40 hover:bg-violet-500/10 hover:text-white"
-                  >
-                    <FaGithub size={20} />
-                  </a>
+                    label="Open GitHub profile"
+                    icon={
+                      <FaGithub size={20} />
+                    }
+                  />
 
-                  <a
+                  <SocialLink
                     href="https://www.linkedin.com/in/jpatrickmagadia/"
-                    aria-label="LinkedIn profile"
-                    className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition hover:border-violet-500/40 hover:bg-violet-500/10 hover:text-white"
-                  >
-                    <FaLinkedin size={20} />
-                  </a>
+                    label="Open LinkedIn profile"
+                    icon={
+                      <FaLinkedin
+                        size={20}
+                      />
+                    }
+                  />
                 </div>
               </div>
             </div>
 
             <div className="rounded-3xl border border-violet-500/20 bg-gradient-to-br from-violet-500/10 to-blue-500/5 p-7">
               <p className="text-sm font-semibold text-violet-300">
-                Good projects to contact me about
+                Good projects to contact me
+                about
               </p>
 
               <ul className="mt-5 space-y-4">
-                {[
-                  'AI assistants and internal tools',
-                  'CRM and workflow automation',
-                  'Custom websites and web applications',
-                  'API, webhook and platform integrations',
-                  'Technical system troubleshooting',
-                ].map((item) => (
-                  <li
-                    key={item}
-                    className="flex items-start gap-3 text-sm leading-6 text-zinc-300"
-                  >
-                    <CheckCircle2
-                      size={17}
-                      className="mt-0.5 shrink-0 text-violet-400"
-                    />
+                {suitableProjects.map(
+                  (item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3 text-sm leading-6 text-zinc-300"
+                    >
+                      <CheckCircle2
+                        size={17}
+                        className="mt-0.5 shrink-0 text-violet-400"
+                      />
 
-                    {item}
-                  </li>
-                ))}
+                      {item}
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
           </div>
@@ -222,7 +313,8 @@ function Contact() {
                 </h3>
 
                 <p className="mt-2 text-sm leading-7 text-zinc-500">
-                  Include the current problem, the result you need and the
+                  Include the current problem,
+                  the result you need and the
                   platforms already involved.
                 </p>
               </div>
@@ -232,23 +324,38 @@ function Contact() {
               </div>
             </div>
 
-            <form onSubmit={handleSubmit} className="mt-8 space-y-5">
-              <input
-                type="checkbox"
-                name="botcheck"
-                className="hidden"
-                tabIndex="-1"
-                autoComplete="off"
-              />
+            <form
+              onSubmit={handleSubmit}
+              className="mt-8 space-y-5"
+            >
+              <div
+                aria-hidden="true"
+                className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden"
+              >
+                <label htmlFor="botcheck">
+                  Leave this field empty
+                </label>
+
+                <input
+                  id="botcheck"
+                  type="text"
+                  name="botcheck"
+                  value={formData.botcheck}
+                  onChange={handleChange}
+                  tabIndex="-1"
+                  autoComplete="off"
+                />
+              </div>
 
               <div className="grid gap-5 sm:grid-cols-2">
                 <FormField
                   label="Your name"
                   name="name"
                   type="text"
-                  placeholder="J Patrick Magadia"
+                  placeholder="Your full name"
                   value={formData.name}
                   onChange={handleChange}
+                  autoComplete="name"
                   required
                 />
 
@@ -259,6 +366,7 @@ function Contact() {
                   placeholder="you@example.com"
                   value={formData.email}
                   onChange={handleChange}
+                  autoComplete="email"
                   required
                 />
               </div>
@@ -271,6 +379,7 @@ function Contact() {
                   placeholder="Company or organisation"
                   value={formData.company}
                   onChange={handleChange}
+                  autoComplete="organization"
                 />
 
                 <div>
@@ -284,42 +393,36 @@ function Contact() {
                   <select
                     id="projectType"
                     name="projectType"
-                    value={formData.projectType}
+                    value={
+                      formData.projectType
+                    }
                     onChange={handleChange}
                     required
                     className="mt-2 w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3.5 text-sm text-white outline-none transition focus:border-violet-500/60 focus:ring-2 focus:ring-violet-500/10"
                   >
-                    <option value="" disabled>
+                    <option
+                      value=""
+                      disabled
+                    >
                       Select a project type
                     </option>
 
-                    <option value="AI System">
-                      AI system or assistant
-                    </option>
-
-                    <option value="Automation">
-                      Business automation
-                    </option>
-
-                    <option value="Website">
-                      Website development
-                    </option>
-
-                    <option value="Web Application">
-                      Web application
-                    </option>
-
-                    <option value="CRM Integration">
-                      CRM integration
-                    </option>
-
-                    <option value="Technical Support">
-                      Technical operations
-                    </option>
-
-                    <option value="Other">
-                      Other
-                    </option>
+                    {projectTypes.map(
+                      (projectType) => (
+                        <option
+                          key={
+                            projectType.value
+                          }
+                          value={
+                            projectType.value
+                          }
+                        >
+                          {
+                            projectType.label
+                          }
+                        </option>
+                      ),
+                    )}
                   </select>
                 </div>
               </div>
@@ -336,51 +439,72 @@ function Contact() {
                   id="message"
                   name="message"
                   rows="7"
+                  minLength="20"
+                  maxLength="3000"
                   placeholder="Describe what you are currently doing, what is not working and what result you want."
                   value={formData.message}
                   onChange={handleChange}
                   required
                   className="mt-2 w-full resize-none rounded-xl border border-white/10 bg-zinc-950 px-4 py-3.5 text-sm leading-7 text-white outline-none transition placeholder:text-zinc-700 focus:border-violet-500/60 focus:ring-2 focus:ring-violet-500/10"
                 />
+
+                <p className="mt-2 text-right text-xs text-zinc-700">
+                  {
+                    formData.message.length
+                  }
+                  /3000
+                </p>
               </div>
 
-              {status === 'success' && (
-                <div
-                  role="status"
-                  className="flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-300"
-                >
-                  <CheckCircle2
-                    size={19}
-                    className="mt-0.5 shrink-0"
-                  />
+              <div
+                aria-live="polite"
+                aria-atomic="true"
+              >
+                {status === 'success' && (
+                  <div
+                    role="status"
+                    className="flex items-start gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-300"
+                  >
+                    <CheckCircle2
+                      size={19}
+                      className="mt-0.5 shrink-0"
+                    />
 
-                  <p>
-                    Your enquiry was sent successfully. I will respond as soon
-                    as possible.
-                  </p>
-                </div>
-              )}
+                    <p>
+                      Your enquiry was sent
+                      successfully. I will
+                      respond as soon as
+                      possible.
+                    </p>
+                  </div>
+                )}
 
-              {status === 'error' && (
-                <div
-                  role="alert"
-                  className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm leading-6 text-red-300"
-                >
-                  The message could not be sent. Please try again or contact
-                  me directly by email.
-                </div>
-              )}
+                {status === 'error' && (
+                  <div
+                    role="alert"
+                    className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm leading-6 text-red-300"
+                  >
+                    The message could not be
+                    sent. Please try again or
+                    contact me directly by
+                    email.
+                  </div>
+                )}
+              </div>
 
               <div className="flex flex-col justify-between gap-5 border-t border-white/10 pt-6 sm:flex-row sm:items-center">
                 <p className="max-w-md text-xs leading-6 text-zinc-600">
-                  Your information will only be used to respond to your project
-                  enquiry.
+                  Your information will only be
+                  used to respond to your
+                  project enquiry.
                 </p>
 
                 <button
                   type="submit"
-                  disabled={status === 'sending'}
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-60"
+                  disabled={
+                    status === 'sending'
+                  }
+                  className="inline-flex min-h-[48px] items-center justify-center gap-2 rounded-xl bg-violet-600 px-6 py-3.5 text-sm font-semibold text-white transition hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === 'sending'
                     ? 'Sending...'
@@ -399,19 +523,24 @@ function Contact() {
   )
 }
 
-function ContactDetail({ icon, label, value, href }) {
+function ContactDetail({
+  icon,
+  label,
+  value,
+  href,
+}) {
   const content = (
     <>
       <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-violet-500/10 text-violet-400">
         {icon}
       </div>
 
-      <div>
+      <div className="min-w-0">
         <p className="text-xs font-semibold uppercase tracking-[0.18em] text-zinc-600">
           {label}
         </p>
 
-        <p className="mt-1 text-sm font-medium text-zinc-300">
+        <p className="mt-1 break-words text-sm font-medium text-zinc-300">
           {value}
         </p>
       </div>
@@ -436,6 +565,24 @@ function ContactDetail({ icon, label, value, href }) {
   )
 }
 
+function SocialLink({
+  href,
+  label,
+  icon,
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={label}
+      className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-400 transition hover:border-violet-500/40 hover:bg-violet-500/10 hover:text-white"
+    >
+      {icon}
+    </a>
+  )
+}
+
 function FormField({
   label,
   name,
@@ -443,6 +590,7 @@ function FormField({
   placeholder,
   value,
   onChange,
+  autoComplete,
   required = false,
 }) {
   return (
@@ -461,6 +609,7 @@ function FormField({
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        autoComplete={autoComplete}
         required={required}
         className="mt-2 w-full rounded-xl border border-white/10 bg-zinc-950 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-zinc-700 focus:border-violet-500/60 focus:ring-2 focus:ring-violet-500/10"
       />
